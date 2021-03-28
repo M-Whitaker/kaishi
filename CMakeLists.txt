@@ -1,6 +1,10 @@
-cmake_minimum_required(VERSION 3.13 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.10 FATAL_ERROR)
 
+if(APPLE)
+project(KaishiEngine LANGUAGES C CXX OBJC)
+else()
 project(KaishiEngine LANGUAGES C CXX)
+endif()
 
 # Compiler Options
 set(CMAKE_CXX_STANDARD 17)

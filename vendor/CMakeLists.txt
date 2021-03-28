@@ -1,6 +1,4 @@
-cmake_minimum_required(VERSION 3.13 FATAL_ERROR)
-
-message(STATUS "MY_VARIABLE=${CMAKE_CURRENT_SOURCE_DIR}")
+cmake_minimum_required(VERSION 3.10 FATAL_ERROR)
 
 # Setting dependency settings
 
@@ -16,13 +14,8 @@ option(ASSIMP_BUILD_SAMPLES OFF)
 option(ASSIMP_BUILD_TESTS OFF)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/assimp)
 
-# Adding GLAD
-project(glad LANGUAGES C)
-file(GLOB "GLAD_HEADERS" "${CMAKE_CURRENT_SOURCE_DIR}/glad/include/glad/glad.h")
-file(GLOB "GLAD_SOURCES" "${CMAKE_CURRENT_SOURCE_DIR}/glad/src/glad.c")
-add_library(glad ${GLAD_SOURCES} ${GLAD_HEADERS})
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/glad)
 target_include_directories(glad PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/glad/include/)
-set_target_properties(glad PROPERTIES LINKER_LANGUAGE C)
 
 # Adding stb
 file(GLOB "STB_HEADERS" "${CMAKE_CURRENT_SOURCE_DIR}/stb/*.h")

@@ -2,8 +2,10 @@
 // Created by Matt Whitaker on 28/02/2021.
 //
 
-#ifndef KAISHIENGINE_KAIPCH_H
-#define KAISHIENGINE_KAIPCH_H
+#ifndef KAISHIENGINE_INCLUDE_KAISHI_KAIPCH_H_
+#define KAISHIENGINE_INCLUDE_KAISHI_KAIPCH_H_
+
+#include "stdio.h"
 
 #include <iostream>
 #include <memory>
@@ -26,7 +28,7 @@
 #define KAI_MACOS
 #elif TARGET_OS_IOS
 #error "IOS NOT SUPPORTED"
-#endif //TARGET_OS
-#endif //__APPLE__
+#endif  // TARGET_OS
+#endif  // __APPLE__
 
-#endif //KAISHIENGINE_KAIPCH_H
+#endif  // KAISHIENGINE_INCLUDE_KAISHI_KAIPCH_H_

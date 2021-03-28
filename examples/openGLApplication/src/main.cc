@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+
 #include <Kaishi/Application.h>
 
 class Application : public Kaishi::KaishiApplication {
@@ -11,9 +12,10 @@ class Application : public Kaishi::KaishiApplication {
 
 int
 main(int argc, const char **argv) {
-  Application app = Application((char *) "My Application", 1.0);
+  Application app = Application((char *) "openGLApplication", 1.0);
+  std::cout << "Application name: " << app.getName() << "\n";
 
-  printf("Application name: %s\n", app.getName());
+  app.mainLoop();
 
   return 0;
 }
