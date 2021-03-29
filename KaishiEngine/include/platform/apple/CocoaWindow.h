@@ -5,6 +5,10 @@
 #ifndef KAISHIENGINE_INCLUDE_PLATFORM_APPLE_COCOAWINDOW_H_
 #define KAISHIENGINE_INCLUDE_PLATFORM_APPLE_COCOAWINDOW_H_
 
+#include "platform/platformDefinition.h"
+
+#ifdef KAI_MACOS
+
 #include <Cocoa/Cocoa.h>
 
 #define GLFW_INCLUDE_NONE
@@ -29,5 +33,7 @@
 - (IBAction)openFileMenu:(id)sender;
 
 @end
+
+#endif  // KAI_MACOS
 
 #endif  // KAISHIENGINE_INCLUDE_PLATFORM_APPLE_COCOAWINDOW_H_

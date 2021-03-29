@@ -2,6 +2,10 @@
 // Created by Matt Whitaker on 24/03/2021.
 //
 
+#include "platform/platformDefinition.h"
+
+#ifdef KAI_MACOS
+
 #import "platform/apple/CocoaWindow.h"
 
 @implementation KaishiWindowController
@@ -44,3 +48,5 @@ CocoaWindowInformation OBJC_API(createCocoaWindow)(GLFWwindow *glfwWindow) {
   [windowController release];
   return windowInfo;
 }
+
+#endif  // KAI_MACOS

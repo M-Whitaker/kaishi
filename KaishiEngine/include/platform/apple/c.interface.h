@@ -5,6 +5,10 @@
 #ifndef KAISHIENGINE_INCLUDE_PLATFORM_APPLE_C_INTERFACE_H_
 #define KAISHIENGINE_INCLUDE_PLATFORM_APPLE_C_INTERFACE_H_
 
+#include "platform/platformDefinition.h"
+
+#ifdef KAI_MACOS
+
 #include <glad/glad.h>
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
@@ -22,5 +26,7 @@ struct CocoaWindowInformation {
  * @param glfwWindow
  */
 CocoaWindowInformation OBJC_API(createCocoaWindow)(GLFWwindow *glfwWindow);
+
+#endif  // KAI_MACOS
 
 #endif  // KAISHIENGINE_INCLUDE_PLATFORM_APPLE_C_INTERFACE_H_

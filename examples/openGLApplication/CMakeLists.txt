@@ -36,8 +36,8 @@ set_source_files_properties(
 set(RESOURCES ${CMAKE_CURRENT_SOURCE_DIR}/MainMenu.xib)
 
 
-# Check if MACOS and build bundle
-add_executable(${APPLICATION_NAME} WIN32 MACOSX_BUNDLE ${APPLICATION_SOURCE} ${APPLICATION_HEADERS} ${ICON} ${RESOURCES})
+add_executable(${APPLICATION_NAME} MACOSX_BUNDLE ${APPLICATION_SOURCE} ${APPLICATION_HEADERS} ${ICON} ${RESOURCES})
+# Check if APPLE and build bundle & xib
 if(APPLE)
 set_source_files_properties(glfw.icns PROPERTIES
         MACOSX_PACKAGE_LOCATION "Resources")

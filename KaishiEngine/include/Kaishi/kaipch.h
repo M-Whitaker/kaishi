@@ -19,16 +19,10 @@
 #include <vector>
 #include <unordered_map>
 
-#ifdef _WIN32
+#include "platform/platformDefinition.h"
+
+#ifdef KAI_WINDOWS
 #include <Windows.h>
-#define KAI_WINDOWS
-#elif __APPLE__
-#include <TargetConditionals.h>
-#if TARGET_OS_OSX
-#define KAI_MACOS
-#elif TARGET_OS_IOS
-#error "IOS NOT SUPPORTED"
-#endif  // TARGET_OS
-#endif  // __APPLE__
+#endif  // KAI_WINDOWS
 
 #endif  // KAISHIENGINE_INCLUDE_KAISHI_KAIPCH_H_

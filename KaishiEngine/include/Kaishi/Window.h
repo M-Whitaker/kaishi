@@ -11,7 +11,9 @@
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
 
+#ifdef KAI_MACOS
 #include "platform/apple/c.interface.h"
+#endif  // KAI_MACOS
 
 namespace Kaishi {
 
@@ -20,7 +22,9 @@ class Window {
 
  private:
   GLFWwindow *window;
+#ifdef KAI_MACOS
   CocoaWindowInformation windowInfo{};
+#endif  // KAI_MACOS
   int xpos, ypos, height;
  public:
   Window();
