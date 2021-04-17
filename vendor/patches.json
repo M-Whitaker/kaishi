@@ -1,0 +1,18 @@
+{
+    "repositories": [
+        {
+            "name": "glfw",
+            "filePath": "glfw",
+            "patches": [
+                {
+                    "fileName": "patches/glfw_cocoa_main_menu.patch",
+                    "reason": "",
+                    "changes": {
+                        "noOfFilesChanged": "1",
+                        "filesChanged": ["src/cocoa_init.m"]
+                    }
+                }
+            ]
+        }
+    ]
+}

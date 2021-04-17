@@ -1,0 +1,15 @@
+diff --git a/src/cocoa_init.m b/src/cocoa_init.m
+index 626d95c2..0ef8c587 100644
+--- a/src/cocoa_init.m
++++ b/src/cocoa_init.m
+@@ -401,6 +401,10 @@ static GLFWbool initializeTIS(void)
+ 
+ @implementation GLFWApplicationDelegate
+ 
++- (IBAction)newWindow:(id)sender {
++  NSLog(@"newwwwww!%@\n", sender);
++}
++
+ - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
+ {
+     _GLFWwindow* window;

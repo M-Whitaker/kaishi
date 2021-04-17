@@ -14,8 +14,27 @@ cp -r share/* /usr/share
 - X11
 ```bash
 $ apt install xorg-dev libglu1-mesa-dev
-# $ apt install libx11-dev
 ```
 
+### Compile
+```bash
+$ mkdir build
+$ make build
+```
 
+## macOS Build
 
+### Dependencies
+- Cmake >= 3.10
+```bash
+$ brew install cmake
+```
+### Compile
+```bash
+$ python3 vender/patches/addVendorPatches.py
+$ make build
+```
+## Windows Build
+```commandline
+
+```
