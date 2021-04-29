@@ -33,7 +33,9 @@ set_source_files_properties(
         MACOSX_PACKAGE_LOCATION Resources
 )
 
-set(RESOURCES ${CMAKE_CURRENT_SOURCE_DIR}/MainMenu.xib)
+set(RESOURCES ${CMAKE_CURRENT_SOURCE_DIR}/MainMenu.xib
+        ${CMAKE_CURRENT_SOURCE_DIR}/assets/
+        )
 
 
 add_executable(${APPLICATION_NAME} MACOSX_BUNDLE ${APPLICATION_SOURCE} ${APPLICATION_HEADERS} ${ICON} ${RESOURCES})
