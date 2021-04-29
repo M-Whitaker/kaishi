@@ -41,6 +41,21 @@ if (NOT Vulkan_FOUND)
     target_compile_definitions(KaishiEngine PUBLIC GLFW_INCLUDE_NONE)
 else ()
     message(STATUS "Vulkan found.")
+    set(KAISHI_VULKAN_BUILD 1)
     target_link_libraries(KaishiEngine PUBLIC Vulkan::Vulkan)
     target_compile_definitions(KaishiEngine PUBLIC HP_SUPPORT_VULKAN)
 endif ()
+
+if("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
+    message(STATUS ${CMAKE_BUILD_TYPE})
+    set(KAISHI_DEBUG 1)
+endif()
+
+configure_file(
+        "${CMAKE_CURRENT_SOURCE_DIR}/cmake/config.h.in"
+        "${CMAKE_CURRENT_SOURCE_DIR}/include/config.h")
+
+file(READ ${CMAKE_CURRENT_SOURCE_DIR}/include/config.h filedata)
+string(REGEX REPLACE "#CMAKE_GENERATOR" "${CMAKE_GENERATOR}" filedata "${filedata}")
+string(REGEX REPLACE "#CMAKE_VERSION" "${CMAKE_VERSION}" filedata "${filedata}")
+file(WRITE  ${CMAKE_CURRENT_SOURCE_DIR}/include/config.h "${filedata}")

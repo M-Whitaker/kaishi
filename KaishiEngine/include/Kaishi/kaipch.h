@@ -5,7 +5,6 @@
 #ifndef KAISHIENGINE_INCLUDE_KAISHI_KAIPCH_H_
 #define KAISHIENGINE_INCLUDE_KAISHI_KAIPCH_H_
 
-#include "stdio.h"
 
 #include <iostream>
 #include <memory>
@@ -14,12 +13,15 @@
 #include <functional>
 
 #include <string>
+#include <fstream>
 #include <sstream>
 #include <array>
 #include <vector>
 #include <unordered_map>
 
+#include "config.h"
 #include "platform/platformDefinition.h"
+#include "Kaishi/utils/Log.h"
 
 #ifdef KAI_WINDOWS
 #include <Windows.h>

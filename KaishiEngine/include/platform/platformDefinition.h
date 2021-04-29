@@ -11,6 +11,7 @@
 #include <TargetConditionals.h>
 #if TARGET_OS_OSX
 #define KAI_MACOS
+#define USER_CONFIG_FOLDER "~/Library/application support/KaishiEngine"
 #elif TARGET_OS_IOS
 #error "IOS NOT SUPPORTED"
 #endif  // TARGET_OS
