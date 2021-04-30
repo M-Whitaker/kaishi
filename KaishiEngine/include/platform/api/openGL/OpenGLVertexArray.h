@@ -14,15 +14,18 @@
 namespace Kaishi {
 
 class OpenGLVertexArray : public VertexArray {
- public:
+ private:
   unsigned int VAO;
+ public:
+  unsigned int getVAO() const;
+ public:
   OpenGLVertexArray();
   void bind() override;
   void unbind() override;
   void remove() override;
-  void linkVertexBuffer(VertexBuffer &VBO, unsigned int layout) override;
+  void linkVertexBuffer(VertexBuffer *VBO, unsigned int layout, GLint numComponents, GLenum type, GLsizei stride, void* offset) override;
 };
 
-} // namespace Kaishi
+}  // namespace Kaishi
 
-#endif // KAISHIENGINE_INCLUDE_PLATFORM_API_OPENGL_OPENGLVERTEXARRAY_H_
+#endif  // KAISHIENGINE_INCLUDE_PLATFORM_API_OPENGL_OPENGLVERTEXARRAY_H_

@@ -22,4 +22,4 @@ void OpenGLIndexBuffer::remove() {
   glDeleteBuffers(1, &IBO);
 }
 
-} // namespace Kaishi
+}  // namespace Kaishi

@@ -14,6 +14,7 @@ namespace Kaishi {
 class OpenGLIndexBuffer : public IndexBuffer {
  private:
   unsigned int IBO;
+
  public:
   OpenGLIndexBuffer(unsigned int *indices, GLsizeiptr size);
   void bind() override;
@@ -21,6 +22,6 @@ class OpenGLIndexBuffer : public IndexBuffer {
   void remove() override;
 };
 
-} // namespace Kaishi
+}  // namespace Kaishi
 
-#endif // KAISHIENGINE_INCLUDE_PLATFORM_API_OPENGL_OPENGLINDEXBUFFER_H_
+#endif  // KAISHIENGINE_INCLUDE_PLATFORM_API_OPENGL_OPENGLINDEXBUFFER_H_

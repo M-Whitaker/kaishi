@@ -23,4 +23,4 @@ void OpenGLVertexBuffer::remove() {
   glDeleteBuffers(1, &VBO);
 }
 
-} // namespace Kaishi
+}  // namespace Kaishi

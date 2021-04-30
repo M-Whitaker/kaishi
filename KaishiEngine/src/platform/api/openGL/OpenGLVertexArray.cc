@@ -8,13 +8,13 @@ namespace Kaishi {
 Kaishi::OpenGLVertexArray::OpenGLVertexArray() {
   glGenVertexArrays(1, &VAO);
 }
-void OpenGLVertexArray::linkVertexBuffer(VertexBuffer &VBO, unsigned int layout) {
+void OpenGLVertexArray::linkVertexBuffer(VertexBuffer *VBO, unsigned int layout, GLint numComponents, GLenum type, GLsizei stride, void* offset) {
   // Select the VBO
-  VBO.bind();
-  glVertexAttribPointer(layout, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *) nullptr);
+  VBO->bind();
+  glVertexAttribPointer(layout, numComponents, type, GL_FALSE, stride, offset);
   glEnableVertexAttribArray(layout);
   // Deselect the VBO
-  VBO.unbind();
+  VBO->unbind();
 }
 void OpenGLVertexArray::bind() {
   glBindVertexArray(VAO);
@@ -26,4 +26,7 @@ void OpenGLVertexArray::remove() {
   printf("Deleting Vertex Array...\n");
   glDeleteVertexArrays(1, &VAO);
 }
-} // namespace Kaishi
+unsigned int OpenGLVertexArray::getVAO() const {
+  return VAO;
+}
+}  // namespace Kaishi

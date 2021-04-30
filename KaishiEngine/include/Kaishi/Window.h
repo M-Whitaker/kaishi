@@ -18,6 +18,8 @@
 #include "Renderer.h"
 #include "Shader.h"
 #include "VertexArray.h"
+#include "ViewHierarchy.h"
+#include "View.h"
 
 #ifdef KAI_MACOS
 #include "platform/apple/c.interface.h"
@@ -26,28 +28,32 @@
 namespace Kaishi {
 
 class Window {
- public:
-
  private:
   GLFWwindow *window{};
+  ViewHierarchy *m_ViewHierarchy;
 #ifdef KAI_MACOS
   CocoaWindowInformation windowInfo{};
 #endif  // KAI_MACOS
   int xpos{}, ypos{}, height{};
+
  public:
-  Window(RenderAPI graphicsApi);
+  explicit Window(RenderAPI graphicsApi);
   ~Window();
   int create(const char *windowName, int i);
   void show();
+  void pushView(View *view);
   static void errorCallback(int error, const char *description);
-  static void framebufferSizeCallback(GLFWwindow *window, int width, int height);
+  static void framebufferSizeCallback(GLFWwindow *window,
+                                      int width, int height);
   GLFWwindow *getGLFWWindow();
-  static void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods);
+  static void keyCallback(GLFWwindow *window, int key,
+                          int scancode, int action, int mods);
   void swapBuffers();
+  void render();
   Shader *shader;
+  OpenGLTexture *texture;
   VertexArray *m_VertexArray;
   int size{};
- private:
 };
 
 }  // namespace Kaishi

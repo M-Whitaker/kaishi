@@ -7,6 +7,8 @@
 
 #include "kaipch.h"
 
+#include <vector>
+
 #include "View.h"
 
 namespace Kaishi {
@@ -18,8 +20,9 @@ class ViewHierarchy {
  public:
   void addView(View *view);
   void addGUIView(View *view);
+  std::vector<View*> getViews();
 };
 
 }  // namespace Kaishi
 
-#endif // KAISHIENGINE_INCLUDE_KAISHI_VIEWHIERARCHY_H_
+#endif  // KAISHIENGINE_INCLUDE_KAISHI_VIEWHIERARCHY_H_

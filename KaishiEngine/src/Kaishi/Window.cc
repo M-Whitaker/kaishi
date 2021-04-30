@@ -6,14 +6,13 @@
 
 namespace Kaishi {
 
-Window::Window(RenderAPI renderApi) {
-
+Window::Window(RenderAPI renderApi)
+: m_ViewHierarchy(new ViewHierarchy()) {
   const char *description;
-  //TODO(M-Whitaker): Setup platform specific shader folder
+  // TODO(M-Whitaker): Setup platform specific shader folder
   switch (renderApi) {
     case RENDER_API_OPENGL:
-    case RENDER_API_OPENGLES:shader = new OpenGLShaders("../../../assets/basic.glsl");
-      break;
+    case RENDER_API_OPENGLES:break;
     case RENDER_API_VULKAN:break;
     case RENDER_API_DIRECT3D11:break;
     case RENDER_API_DIRECT3D12:break;
@@ -36,7 +35,9 @@ Window::Window(RenderAPI renderApi) {
 }
 
 Window::~Window() {
-  m_VertexArray->remove();
+  for (View *view : m_ViewHierarchy->getViews()) {
+    view->onDetach();
+  }
   glfwDestroyWindow(window);
 }
 
@@ -45,7 +46,6 @@ void Window::errorCallback(int error, const char *description) {
 }
 
 int Window::create(const char *windowName, int i) {
-
   const char *description;
   size = height / 4;
 
@@ -84,53 +84,15 @@ int Window::create(const char *windowName, int i) {
   else
     glClearColor(255, 255, 255, 1);
 #endif
-  // build and compile our shader program
-  // ------------------------------------
-  shader->setup();
-
-  // set up vertex data (and buffer(s)) and configure vertex attributes
-  // ------------------------------------------------------------------
-  float vertices[] =
-      {
-          -0.5f, -0.5f * float(sqrt(3)) / 3, 0.0f, // Lower left corner
-          0.5f, -0.5f * float(sqrt(3)) / 3, 0.0f, // Lower right corner
-          0.0f, 0.5f * float(sqrt(3)) * 2 / 3, 0.0f, // Upper corner
-          -0.5f / 2, 0.5f * float(sqrt(3)) / 6, 0.0f, // Inner left
-          0.5f / 2, 0.5f * float(sqrt(3)) / 6, 0.0f, // Inner right
-          0.0f, -0.5f * float(sqrt(3)) / 3, 0.0f // Inner down
-      };
-
-  // Indices for vertices order
-  unsigned int indices[] =
-      {
-          0, 3, 5, // Lower left triangle
-          3, 2, 4, // Lower right triangle
-          5, 4, 1 // Upper triangle
-      };
-
-  m_VertexArray = new OpenGLVertexArray();
-  m_VertexArray->bind();
-
-  OpenGLVertexBuffer vertexBuffer = OpenGLVertexBuffer(vertices, sizeof(vertices));
-
-  OpenGLIndexBuffer indexBuffer = OpenGLIndexBuffer(indices, sizeof(indices));
-
-  m_VertexArray->linkVertexBuffer(vertexBuffer, 0);
-
-  // unbind both buffers so we don't use them accidentally
-  vertexBuffer.unbind();
-  indexBuffer.unbind();
-  m_VertexArray->unbind();
-
-  vertexBuffer.remove();
-  indexBuffer.remove();
-  // Check for openGL errors
-  glCheckError();
 
   return 0;
 }
 
 void Window::show() {
+  glfwMakeContextCurrent(window);
+  for (View *view : m_ViewHierarchy->getViews()) {
+    view->onAttach();
+  }
   glfwShowWindow(window);
 }
 
@@ -153,6 +115,17 @@ void Window::framebufferSizeCallback(GLFWwindow *window, int width, int height) 
 }
 void Window::swapBuffers() {
   glfwSwapBuffers(window);
+}
+void Window::pushView(View *view) {
+  m_ViewHierarchy->addView(view);
+}
+void Window::render() {
+  glfwMakeContextCurrent(window);
+  for (View *view : m_ViewHierarchy->getViews()) {
+    view->renderLoop();
+  }
+  swapBuffers();
+  glfwPollEvents();
 }
 
 }  // namespace Kaishi

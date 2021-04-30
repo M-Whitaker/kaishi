@@ -6,8 +6,6 @@
 #define KAISHIENGINE_INCLUDE_KAISHI_KAISHI_H_
 
 #include "Application.h"
-#include "Window.h"
-#include "Shader.h"
-#include "Renderer.h"
+#include "ViewHierarchy.h"
 
 #endif  // KAISHIENGINE_INCLUDE_KAISHI_KAISHI_H_

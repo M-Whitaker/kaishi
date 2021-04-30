@@ -17,12 +17,12 @@ class Error {
 };
 
 #ifndef KAISHI_DEBUG
-#define glCheckError() Error::glCheckError_(__FILE__, __LINE__)
+#define glCheckError() Kaishi::Error::glCheckError_(__FILE__, __LINE__)
 #else
 #define glCheckError()
 #endif
 
 }  // namespace Kaishi
 
-#endif //KAISHIENGINE_INCLUDE_PLATFORM_API_OPENGL_OPENGLERROR_H_
+#endif  // KAISHIENGINE_INCLUDE_PLATFORM_API_OPENGL_OPENGLERROR_H_
 

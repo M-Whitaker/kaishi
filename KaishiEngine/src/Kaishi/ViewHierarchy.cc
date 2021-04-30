@@ -12,5 +12,8 @@ void ViewHierarchy::addView(View *view) {
 void ViewHierarchy::addGUIView(View *view) {
   m_GuiViews.push_back(view);
 }
+std::vector<View *> ViewHierarchy::getViews() {
+  return m_RenderViews;
+}
 
 }  // namespace Kaishi

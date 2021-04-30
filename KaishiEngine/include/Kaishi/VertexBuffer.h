@@ -15,6 +15,6 @@ class VertexBuffer {
   virtual void remove() = 0;
 };
 
-} // namespace Kaishi
+}  // namespace Kaishi
 
-#endif // KAISHIENGINE_INCLUDE_KAISHI_VERTEXBUFFER_H_
+#endif  // KAISHIENGINE_INCLUDE_KAISHI_VERTEXBUFFER_H_

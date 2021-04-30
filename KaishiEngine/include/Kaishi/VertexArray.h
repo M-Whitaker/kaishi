@@ -7,6 +7,8 @@
 
 #include "VertexBuffer.h"
 
+#include <glad/glad.h>
+
 namespace Kaishi {
 
 class VertexArray {
@@ -14,9 +16,11 @@ class VertexArray {
   virtual void bind() = 0;
   virtual void unbind() = 0;
   virtual void remove() = 0;
-  virtual void linkVertexBuffer(VertexBuffer &VBO, unsigned int layout) = 0;
+  virtual void linkVertexBuffer(VertexBuffer *VBO, unsigned int layout,
+                                GLint numComponents, GLenum type,
+                                GLsizei stride, void* offset) = 0;
 };
 
 }  // namespace Kaishi
 
-#endif // KAISHIENGINE_INCLUDE_KAISHI_VERTEXARRAY_H_
+#endif  // KAISHIENGINE_INCLUDE_KAISHI_VERTEXARRAY_H_

@@ -18,6 +18,7 @@ class OpenGLRenderer : public Renderer {
  private:
   OpenGLShaders m_Shader;
   OpenGLVertexArray m_VAO;
+
  public:
   OpenGLRenderer(OpenGLShaders &shader, OpenGLVertexArray &VAO);
   void drawQuad() override;
@@ -26,6 +27,6 @@ class OpenGLRenderer : public Renderer {
   void draw() override;
 };
 
-} // namespace Kaishi
+}  // namespace Kaishi
 
-#endif // KAISHIENGINE_INCLUDE_PLATFORM_API_OPENGL_OPENGLRENDERER_H_
+#endif  // KAISHIENGINE_INCLUDE_PLATFORM_API_OPENGL_OPENGLRENDERER_H_

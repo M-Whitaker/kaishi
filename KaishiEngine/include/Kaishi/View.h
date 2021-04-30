@@ -5,12 +5,13 @@
 #ifndef KAISHIENGINE_INCLUDE_KAISHI_VIEW_H_
 #define KAISHIENGINE_INCLUDE_KAISHI_VIEW_H_
 
-#include "Renderer.h"
-
 namespace Kaishi {
 
 class View {
-
+ public:
+  virtual void onAttach() = 0;
+  virtual void onDetach() = 0;
+  virtual void renderLoop() = 0;
 };
 
 }  // namespace Kaishi

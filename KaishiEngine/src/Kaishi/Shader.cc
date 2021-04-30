@@ -4,6 +4,4 @@
 
 #include "Shader.h"
 
-namespace Kaishi {
-
-} // namespace Kaishi
+namespace Kaishi {}  // namespace Kaishi

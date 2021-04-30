@@ -14,12 +14,13 @@ namespace Kaishi {
 class OpenGLVertexBuffer : public VertexBuffer {
  private:
   unsigned int VBO;
+
  public:
   OpenGLVertexBuffer(float *vertices, GLsizeiptr size);
   void bind() override;
   void unbind() override;
   void remove() override;
 };
-} // namespace Kaishi
+}  // namespace Kaishi
 
-#endif // KAISHIENGINE_INCLUDE_PLATFORM_API_OPENGL_OPENGLVERTEXBUFFER_H_
+#endif  // KAISHIENGINE_INCLUDE_PLATFORM_API_OPENGL_OPENGLVERTEXBUFFER_H_

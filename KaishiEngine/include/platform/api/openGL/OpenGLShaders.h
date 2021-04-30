@@ -105,6 +105,7 @@ class OpenGLShaders : public Shader {
    * @param mat
    */
   void setMat4(const char *name, const glm::mat4 &mat) const override;
+
  private:
   unsigned int program{};
   const char *m_Filename;

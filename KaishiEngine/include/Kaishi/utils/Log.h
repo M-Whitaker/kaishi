@@ -32,10 +32,12 @@ class Log {
   const char *m_TimeFormat = "%FT%TZ";
   std::string m_Filename;
   void print(const char *string, const char *colourFmtString);
+
  protected:
   explicit Log(LogLevel logLevel);
   static Log* log_;
   std::string value_;
+
  public:
   Log(Log &other) = delete;
   void operator=(const Log &) = delete;
@@ -57,4 +59,4 @@ class Log {
 
 }  // namespace Kaishi
 
-#endif //KAISHIENGINE_INCLUDE_KAISHI_UTILS_LOG_H_
+#endif  //KAISHIENGINE_INCLUDE_KAISHI_UTILS_LOG_H_

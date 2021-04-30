@@ -9,6 +9,7 @@
 #include "OpenGLVertexBuffer.h"
 #include "OpenGLIndexBuffer.h"
 #include "OpenGLVertexArray.h"
+#include "OpenGLTexture.h"
 #include "OpenGLError.h"
 
 namespace Kaishi {}  // namespace Kaishi

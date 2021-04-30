@@ -2,8 +2,8 @@
 // Created by Matt Whitaker on 17/04/2021.
 //
 
-#ifndef KAISHIENGINE_INCLUDE_KAISHI_MATH_H_
-#define KAISHIENGINE_INCLUDE_KAISHI_MATH_H_
+#ifndef KAISHIENGINE_INCLUDE_KAISHI_UTILS_MATH_H_
+#define KAISHIENGINE_INCLUDE_KAISHI_UTILS_MATH_H_
 
 namespace Kaishi {
 
@@ -20,4 +20,4 @@ class Math {
 
 }  // namespace Kaishi
 
-#endif //KAISHIENGINE_INCLUDE_KAISHI_MATH_H_
+#endif  // KAISHIENGINE_INCLUDE_KAISHI_UTILS_MATH_H_

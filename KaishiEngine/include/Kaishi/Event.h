@@ -9,9 +9,7 @@
 
 namespace Kaishi {
 
-class Event {
-
-};
+class Event {};
 
 }  // namespace Kaishi
 

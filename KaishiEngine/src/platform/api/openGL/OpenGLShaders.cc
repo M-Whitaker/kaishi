@@ -7,9 +7,7 @@
 namespace Kaishi {
 
 OpenGLShaders::OpenGLShaders(const char *filename)
-    : m_Filename(filename) {
-
-}
+    : m_Filename(filename) {}
 
 void OpenGLShaders::setup() {
   readShaderFile();
@@ -20,7 +18,11 @@ void OpenGLShaders::setup() {
 // activate the shader
 // ------------------------------------------------------------------------
 void OpenGLShaders::use() {
-  glUseProgram(program);
+  if (program) {
+    glUseProgram(program);
+  } else {
+    printf("No shader found!\n");
+  }
 }
 // utility uniform functions
 // ------------------------------------------------------------------------
@@ -67,7 +69,7 @@ unsigned int OpenGLShaders::getShaderProgram() const {
 ShaderTypeFlags OpenGLShaders::readShaderFile() {
   std::ifstream File(m_Filename);
   std::string line;
-  ShaderTypeFlags shaderFlags;
+  ShaderTypeFlags shaderFlags{};
   std::stringstream vertexStringStream;
   std::stringstream fragmentStringStream;
   std::stringstream computeStringStream;
@@ -82,12 +84,14 @@ ShaderTypeFlags OpenGLShaders::readShaderFile() {
         shaderFlags.compute = !shaderFlags.compute;
       else if (line == "#endshadertype")
         shaderFlags.reset();
-    } else if (shaderFlags.vertex)
-      vertexStringStream << line;
-    else if (shaderFlags.fragment)
-      fragmentStringStream << line;
-    else if (shaderFlags.compute)
-      computeStringStream << line;
+    } else {
+      if (shaderFlags.vertex)
+        vertexStringStream << line;
+      else if (shaderFlags.fragment)
+        fragmentStringStream << line;
+      else if (shaderFlags.compute)
+        computeStringStream << line;
+    }
   }
 
   File.close();
@@ -109,10 +113,9 @@ int OpenGLShaders::compile() {
   int success;
   char infoLog[512];
   glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
-  if (!success)
-  {
+  if (!success) {
     glGetShaderInfoLog(vertexShader, 512, nullptr, infoLog);
-    std::cout << "ERROR::OpenGLShaders::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
+    printf("ERROR::OpenGLShaders::VERTEX::COMPILATION_FAILED %s\n Source: %s\n", infoLog, m_VertexSource.c_str());
   }
   // fragment shader
   fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
@@ -121,13 +124,11 @@ int OpenGLShaders::compile() {
   glCompileShader(fragmentShader);
   // check for shader compile errors
   glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
-  if (!success)
-  {
+  if (!success) {
     glGetShaderInfoLog(fragmentShader, 512, nullptr, infoLog);
-    std::cout << "ERROR::OpenGLShaders::FRAGMENT::COMPILATION_FAILED\n" << infoLog << std::endl;
+    printf("ERROR::OpenGLShaders::FRAGMENT::COMPILATION_FAILED %s\n Source: %s\n", infoLog, m_FragmentSource.c_str());
   }
   return 0;
-
 }
 
 int OpenGLShaders::link() {
@@ -142,11 +143,10 @@ int OpenGLShaders::link() {
   glGetProgramiv(program, GL_LINK_STATUS, &success);
   if (!success) {
     glGetProgramInfoLog(program, 512, nullptr, infoLog);
-    std::cout << "ERROR::OpenGLShaders::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
+    printf("ERROR::OpenGLShaders::PROGRAM::LINKING_FAILED %s\n", infoLog);
   }
   glDeleteShader(vertexShader);
   glDeleteShader(fragmentShader);
   return 0;
 }
 }  // namespace Kaishi
-

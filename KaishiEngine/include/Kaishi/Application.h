@@ -16,6 +16,7 @@
 
 #include "Window.h"
 #include "Renderer.h"
+#include "View.h"
 
 namespace Kaishi {
 
@@ -24,12 +25,17 @@ class KaishiApplication {
   char *m_name;
   float m_version;
   RenderAPI m_RenderApi;
-  std::vector<Window*> windows = {};
-  virtual int renderLoop(Kaishi::Window* window) = 0;
+  std::vector<Window *> windows = {};
 
  public:
   KaishiApplication(char *name, float version, RenderAPI renderApi);
-  int setup();
+  int setup(unsigned int noOfWindows);
+  int run();
+  static void pushView(Window *window, View *view);
+
+  Window *getWindow(int idx) const {
+    return windows[idx];
+  }
 
   char *getName() const {
     return m_name;
