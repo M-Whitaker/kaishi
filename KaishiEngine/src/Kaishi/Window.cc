@@ -122,6 +122,8 @@ int Window::create(const char *windowName, int i) {
   indexBuffer.unbind();
   m_VertexArray->unbind();
 
+  Texture texture = OpenGLTexture("../../../assets/pig.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+
   vertexBuffer.remove();
   indexBuffer.remove();
   // Check for openGL errors
