@@ -68,29 +68,29 @@ unsigned int OpenGLShaders::getShaderProgram() const {
 
 ShaderTypeFlags OpenGLShaders::readShaderFile() {
   std::ifstream File(m_Filename);
-  std::string line;
+  std::string currentLine;
   ShaderTypeFlags shaderFlags{};
   std::stringstream vertexStringStream;
   std::stringstream fragmentStringStream;
   std::stringstream computeStringStream;
 
-  while (std::getline(File, line)) {
-    if (line[0] == '#') {
-      if (line == "#shadertype vertex")
+  while (std::getline(File, currentLine)) {
+    if (currentLine[0] == '#') {
+      if (currentLine == "#shadertype vertex")
         shaderFlags.vertex = !shaderFlags.vertex;
-      else if (line == "#shadertype fragment")
+      else if (currentLine == "#shadertype fragment")
         shaderFlags.fragment = !shaderFlags.fragment;
-      else if (line == "#shadertype compute")
+      else if (currentLine == "#shadertype compute")
         shaderFlags.compute = !shaderFlags.compute;
-      else if (line == "#endshadertype")
+      else if (currentLine == "#endshadertype")
         shaderFlags.reset();
     } else {
       if (shaderFlags.vertex)
-        vertexStringStream << line;
+        vertexStringStream << currentLine << "\n";
       else if (shaderFlags.fragment)
-        fragmentStringStream << line;
+        fragmentStringStream << currentLine << "\n";
       else if (shaderFlags.compute)
-        computeStringStream << line;
+        computeStringStream << currentLine << "\n";
     }
   }
 

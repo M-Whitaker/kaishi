@@ -48,6 +48,9 @@ class Window {
   GLFWwindow *getGLFWWindow();
   static void keyCallback(GLFWwindow *window, int key,
                           int scancode, int action, int mods);
+  /**
+   * Swap the front and back framebuffer.
+   */
   void swapBuffers();
   void render();
   Shader *shader;

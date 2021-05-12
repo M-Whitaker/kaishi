@@ -7,6 +7,10 @@
 
 #include "Kaishi/kaipch.h"
 
+#include <string>
+#include <sstream>
+#include <fstream>
+
 #include <glad/glad.h>
 #include <glm/glm.hpp>
 

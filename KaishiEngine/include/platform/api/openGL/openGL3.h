@@ -12,6 +12,16 @@
 #include "OpenGLTexture.h"
 #include "OpenGLError.h"
 
-namespace Kaishi {}  // namespace Kaishi
+namespace Kaishi {
+
+struct OpenGlContextInfo {
+  int majorVersion;
+  int minorVersion;
+  int shaderVersion;
+  int numberOfTextureSlots;
+};
+
+
+}  // namespace Kaishi
 
 #endif  // KAISHIENGINE_INCLUDE_PLATFORM_API_OPENGL_OPENGL3_H_

@@ -25,11 +25,16 @@ Window::Window(RenderAPI renderApi)
   }
 #ifdef KAI_MACOS
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+#endif
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
-#endif
+
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
   glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+
+#ifdef KAISHI_DEBUG
+  glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
+#endif
 
   glfwGetMonitorWorkarea(glfwGetPrimaryMonitor(), &xpos, &ypos, nullptr, &height);
 }
@@ -42,7 +47,7 @@ Window::~Window() {
 }
 
 void Window::errorCallback(int error, const char *description) {
-  fprintf(stderr, "Error: %s\n", description);
+  fprintf(stderr, "GLFW Error: %s\n", description);
 }
 
 int Window::create(const char *windowName, int i) {
