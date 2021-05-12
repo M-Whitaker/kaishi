@@ -17,6 +17,7 @@ target_include_directories(KaishiEngine PRIVATE
         "${CMAKE_CURRENT_SOURCE_DIR}/include/"
         "${CMAKE_CURRENT_SOURCE_DIR}/include/Kaishi/"
         "${CMAKE_SOURCE_DIR}/vendor/glad/include/"
+        "${CMAKE_SOURCE_DIR}/vendor/openal/include/"
         "${CMAKE_SOURCE_DIR}/vendor/glfw/include/"
         "${CMAKE_SOURCE_DIR}/vendor/imgui/"
         "${CMAKE_SOURCE_DIR}/vendor/stb/"
@@ -33,7 +34,7 @@ message(STATUS "Searching for Vulkan")
 find_package(Vulkan)
 
 
-target_link_libraries(KaishiEngine PUBLIC glad glfw glm imgui assimp stb)
+target_link_libraries(KaishiEngine PUBLIC glad OpenAL glfw glm imgui assimp stb)
 
 
 if (NOT Vulkan_FOUND)

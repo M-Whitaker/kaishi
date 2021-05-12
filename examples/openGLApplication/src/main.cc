@@ -6,6 +6,7 @@
 #include <unistd.h>
 
 #include <Kaishi/Kaishi.h>
+#include <Kaishi/Audio.h>
 #include "main.h"
 
 int Application::renderLoop(Kaishi::Window* window) {
@@ -41,6 +42,9 @@ int Application::renderLoop(Kaishi::Window* window) {
 int main(int argc, const char **argv) {
   // Create one application
   Application app = Application((char *) "openGLApplication", 1.0, Kaishi::RENDER_API_OPENGL);
+  Kaishi::Audio audio = Kaishi::Audio();
+//  audio.loadWAVFile("../../../assets/test.wav");
+  audio.play();
   char cwd[PATH_MAX];
   if (getcwd(cwd, sizeof(cwd)) != nullptr) {
     printf("Current working dir: %s\n", cwd);
