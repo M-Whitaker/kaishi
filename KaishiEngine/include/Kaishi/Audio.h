@@ -16,11 +16,19 @@
 
 namespace Kaishi {
 
+typedef struct AudioFile {
+  int channel;
+  int sampleRate;
+  int bps;
+  int size;
+} AudioFile;
+
 class Audio {
  private:
   ALCdevice* device;
   ALCcontext* context;
-  unsigned int sourceid, bufferid;
+  ALuint source = 0;
+  ALuint buffer = 0;
   char* data;
  public:
   Audio();

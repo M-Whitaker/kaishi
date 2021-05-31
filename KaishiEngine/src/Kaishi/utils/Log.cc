@@ -31,44 +31,74 @@ void Log::setLogLevel(LogLevel logLevel) {
 LogLevel Log::getLogLevel() {
   return m_LogLevel;
 }
-void Log::debug(std::string &str) {
-  debug(str.c_str());
+void Log::debug(std::string &fmt, ...) {
+  debug("%s", fmt.c_str());
 }
-void Log::info(std::string &str) {
-  info(str.c_str());
+void Log::info(std::string &fmt, ...) {
+  info("%s", fmt.c_str());
 }
-void Log::warn(std::string &str) {
-  warn(str.c_str());
+void Log::warn(std::string &fmt, ...) {
+  warn("%s", fmt.c_str());
 }
-void Log::error(std::string &str) {
-  error(str.c_str());
+void Log::error(std::string &fmt, ...) {
+  error("%s", fmt.c_str());
 }
-void Log::critical(std::string &str) {
-  critical(str.c_str());
+void Log::critical(std::string &fmt, ...) {
+  critical("%s", fmt.c_str());
 }
-void Log::debug(const char *str) {
+void Log::debug(const char *fmt, ...) {
   if (m_LogLevel <= LOGGING_LEVEL_DEBUG) {
-    print(str, CONSOLE_OUTPUT_RESET);
+    va_list args;
+    va_start(args, fmt);
+    //TODO: alloc memory
+    char buffer[4096];
+    int rc = vsnprintf(buffer, sizeof(buffer), fmt, args);
+    print(buffer, CONSOLE_OUTPUT_BLU);
+    va_end(args);
   }
 }
-void Log::info(const char *str) {
+void Log::info(const char *fmt, ...) {
   if (m_LogLevel <= LOGGING_LEVEL_INFO) {
-    print(str, CONSOLE_OUTPUT_BLU);
+    va_list args;
+    va_start(args, fmt);
+    //TODO: alloc memory
+    char buffer[4096];
+    int rc = vsnprintf(buffer, sizeof(buffer), fmt, args);
+    print(buffer, CONSOLE_OUTPUT_RESET);
+    va_end(args);
   }
 }
-void Log::warn(const char *str) {
+void Log::warn(const char *fmt, ...) {
   if (m_LogLevel <= LOGGING_LEVEL_WARN) {
-    print(str, CONSOLE_OUTPUT_YEL);
+    va_list args;
+    va_start(args, fmt);
+    //TODO: alloc memory
+    char buffer[4096];
+    int rc = vsnprintf(buffer, sizeof(buffer), fmt, args);
+    print(buffer, CONSOLE_OUTPUT_YEL);
+    va_end(args);
   }
 }
-void Log::error(const char *str) {
+void Log::error(const char *fmt, ...) {
   if (m_LogLevel <= LOGGING_LEVEL_ERROR) {
-    print(str, CONSOLE_OUTPUT_RED);
+    va_list args;
+    va_start(args, fmt);
+    //TODO: alloc memory
+    char buffer[4096];
+    int rc = vsnprintf(buffer, sizeof(buffer), fmt, args);
+    print(buffer, CONSOLE_OUTPUT_RED);
+    va_end(args);
   }
 }
-void Log::critical(const char *str) {
+void Log::critical(const char *fmt, ...) {
   if (m_LogLevel <= LOGGING_LEVEL_CRITICAL) {
-    print(str, CONSOLE_OUTPUT_RED);
+    va_list args;
+    va_start(args, fmt);
+    //TODO: alloc memory
+    char buffer[4096];
+    int rc = vsnprintf(buffer, sizeof(buffer), fmt, args);
+    print(buffer, CONSOLE_OUTPUT_RED);
+    va_end(args);
   }
 }
 void Log::print(const char *string, const char *colourFmtString) {

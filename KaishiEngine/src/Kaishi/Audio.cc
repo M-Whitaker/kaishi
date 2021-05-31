@@ -12,7 +12,7 @@ bool isBigEndian()
   return !((char*)&a)[0];
 }
 
-int convertToInt(char* buffer, int len)
+int convertToInt(const char* buffer, int len)
 {
   int a = 0;
   if (!isBigEndian())
@@ -24,7 +24,7 @@ int convertToInt(char* buffer, int len)
   return a;
 }
 
-char* loadWAV(const char* fn, int *channels, int *sampleRate, int *bps, int *size)
+static char* _loadWAV(const char* fn, int *channels, int *sampleRate, int *bps, int *size)
 {
   char buffer[4];
   std::ifstream in(fn, std::ios::binary);
@@ -56,8 +56,6 @@ char* loadWAV(const char* fn, int *channels, int *sampleRate, int *bps, int *siz
 }
 
 Audio::Audio() {
-  int channel, sampleRate, bps, size;
-  data = loadWAV("../../../assets/test.wav", &channel, &sampleRate, &bps, &size);
 
   device = alcOpenDevice(nullptr);
   if (!device)
@@ -71,32 +69,10 @@ Audio::Audio() {
     return;
   }
   alcMakeContextCurrent(context);
-
-  unsigned int format;
-  alGenBuffers(1, &bufferid);
-  if (channel == 1) {
-    if (bps == 8) {
-      format = AL_FORMAT_MONO8;
-    }
-    else {
-      format = AL_FORMAT_MONO16;
-    }
-  }
-  else {
-    if (bps == 8) {
-      format = AL_FORMAT_STEREO8;
-    }
-    else {
-      format = AL_FORMAT_STEREO16;
-    }
-  }
-  alBufferData(bufferid, format, data, size, sampleRate);
-  alGenSources(1, &sourceid);
-  alSourcei(sourceid, AL_BUFFER, bufferid);
 }
 Audio::~Audio() {
-  alDeleteSources(1, &sourceid);
-  alDeleteBuffers(1, &bufferid);
+  alDeleteSources(1, &source);
+  alDeleteBuffers(1, &buffer);
 
   alcDestroyContext(context);
   alcCloseDevice(device);
@@ -104,7 +80,35 @@ Audio::~Audio() {
 }
 void Audio::play() {
   // TODO(M-Whitaker): Check if AL_PLAYING
-  alSourcePlay(sourceid);
+  alSourcePlay(source);
+}
+void Audio::pause() {
+  alSourcePause(source);
+}
+void Audio::loadWAVFile(const char *filename) {
+  AudioFile audioFile = {0};
+  data = _loadWAV(filename, &audioFile.channel, &audioFile.sampleRate, &audioFile.bps, &audioFile.size);
+  ALenum format;
+  alGenBuffers(1, &buffer);
+  if (audioFile.channel == 1) {
+    if (audioFile.bps == 8) {
+      format = AL_FORMAT_MONO8;
+    }
+    else {
+      format = AL_FORMAT_MONO16;
+    }
+  }
+  else {
+    if (audioFile.bps == 8) {
+      format = AL_FORMAT_STEREO8;
+    }
+    else {
+      format = AL_FORMAT_STEREO16;
+    }
+  }
+  alBufferData(buffer, format, data, audioFile.size, audioFile.sampleRate);
+  alGenSources(1, &source);
+  alSourcei(source, AL_BUFFER, buffer);
 }
 
 }  // namespace Kaishi

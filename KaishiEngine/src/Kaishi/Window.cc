@@ -2,7 +2,6 @@
 // Created by Matt Whitaker on 24/03/2021.
 //
 
-#include <platform/api/openGL/OpenGLIndexBuffer.h>
 #include "Window.h"
 
 namespace Kaishi {
@@ -13,7 +12,7 @@ Window::Window(RenderAPI renderApi) {
   //TODO(M-Whitaker): Setup platform specific shader folder
   switch (renderApi) {
     case RENDER_API_OPENGL:
-    case RENDER_API_OPENGLES:shader = new OpenGLShaders("../../../assets/basic.glsl");
+    case RENDER_API_OPENGLES:shader = new OpenGLShaders("assets/basic.glsl");
       break;
     case RENDER_API_VULKAN:break;
     case RENDER_API_DIRECT3D11:break;
