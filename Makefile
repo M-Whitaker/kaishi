@@ -1,4 +1,4 @@
-.PHONY: openGLApplication build test clean format lint
+.PHONY: openGLApplication build test clean format lint docs
 
 openGLApplication: build
 	./build/bin/examples/openGLApplication/openGLApplication
@@ -13,3 +13,6 @@ clean:
 lint:
 	@printf '\n---- CPPLINT ----\n'
 	cd KaishiEngine && cpplint --recursive */*
+
+docs:
+	doxygen

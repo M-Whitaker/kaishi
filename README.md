@@ -1,4 +1,4 @@
-# kaishi
+# Kaishi Engine
 
 ## Linux Build
 
