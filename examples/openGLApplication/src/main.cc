@@ -8,7 +8,17 @@ int main(int argc, const char **argv) {
   // Create one application
   Application app = Application((char *) "openGLApplication", 1.0, Kaishi::RENDER_API_OPENGL);
 
-  Kaishi::Log* log = Kaishi::Log::GetInstance(Kaishi::LOGGING_LEVEL_DEBUG);
+  Kaishi::Log *log = Kaishi::Log::GetInstance(Kaishi::LOGGING_LEVEL_DEBUG);
+
+  Kaishi::Audio audio = Kaishi::Audio();
+  audio.loadWAVFile("../Resources/assets/test.wav");
+  std::thread thread = std::thread([&](){
+    audio.play();
+    sleep(1);
+    audio.pause();
+    sleep(1);
+    audio.play();
+  });
 
   printf("Application name: %s\n", app.getName());
 
@@ -25,7 +35,7 @@ int main(int argc, const char **argv) {
   app.pushView(window2, view2);
   // Run the application
   app.run();
-
+  thread.join();
   return 0;
 }
 
@@ -35,7 +45,7 @@ void ExampleView::onAttach() {
 
   // build and compile our shader program
   // ------------------------------------
-  shader = new Kaishi::OpenGLShaders("../../../assets/basic.glsl");
+  shader = new Kaishi::OpenGLShaders("assets/basic.glsl");
   shader->setup();
 
   // set up vertex data (and buffer(s)) and configure vertex attributes
@@ -79,7 +89,7 @@ void ExampleView::onAttach() {
   indexBuffer.unbind();
 
   texture =
-      new Kaishi::OpenGLTexture("../../../assets/pig.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+      new Kaishi::OpenGLTexture("assets/pig.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
 
   // Set the texture uniform
   shader->use();

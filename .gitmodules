@@ -16,3 +16,6 @@
 [submodule "vendor/imgui"]
 	path = vendor/imgui
 	url = git@github.com:ocornut/imgui.git
+[submodule "vendor/openal"]
+	path = vendor/openal
+	url = git@github.com:kcat/openal-soft.git

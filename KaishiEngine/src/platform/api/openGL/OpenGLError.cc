@@ -29,7 +29,7 @@ GLenum Error::glCheckError_(const char *file, int line) {
     Log* log = Log::GetInstance(LOGGING_LEVEL_DEBUG);
     char BUFFER[100];
     snprintf(BUFFER, sizeof(BUFFER), "%s | %s | \"(%d)\"\n", error.c_str(), file, line);
-    log->error(BUFFER);
+    log->error("%s\n", BUFFER);
   }
   return errorCode;
 }

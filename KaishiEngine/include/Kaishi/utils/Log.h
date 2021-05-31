@@ -7,6 +7,17 @@
 
 namespace Kaishi {
 
+#if defined(__GNUC__) && !defined(__llvm__) && !defined(__INTEL_COMPILER)
+#define PRINTFLIKE(fmtarg,firstvararg) __attribute__((format(printf,fmtarg,firstvararg)))
+#define NORETURN()      __attribute__((noreturn))
+#elif __clang__
+#define PRINTFLIKE(fmtarg,firstvararg) __printflike(fmtarg, firstvararg)
+#define NORETURN()      /* If only */
+#else
+#define PRINTFLIKE(n,m) /* If only */
+#define NORETURN()      /* If only */
+#endif /* __GNUC__ */
+
 #define CONSOLE_OUTPUT_RED "\x1B[31m"
 #define CONSOLE_OUTPUT_GRN "\x1B[32m"
 #define CONSOLE_OUTPUT_YEL "\x1B[33m"
@@ -31,13 +42,11 @@ class Log {
   LogLevel m_LogLevel;
   const char *m_TimeFormat = "%FT%TZ";
   std::string m_Filename;
-  void print(const char *string, const char *colourFmtString);
-
  protected:
   explicit Log(LogLevel logLevel);
   static Log* log_;
   std::string value_;
-
+  void print(const char *string, const char *colourFmtString);
  public:
   Log(Log &other) = delete;
   void operator=(const Log &) = delete;
@@ -45,18 +54,18 @@ class Log {
 
   void setLogLevel(LogLevel logLevel);
   LogLevel getLogLevel();
-  void debug(std::string &str);
-  void debug(const char* str);
-  void info(std::string &str);
-  void info(const char* str);
-  void warn(std::string &str);
-  void warn(const char* str);
-  void error(std::string &str);
-  void error(const char* str);
-  void critical(std::string &str);
-  void critical(const char* str);
+  void debug(std::string &fmt, ...);
+  void debug(const char *fmt, ...) PRINTFLIKE(2, 3);
+  void info(std::string &fmt, ...);
+  void info(const char *fmt, ...) PRINTFLIKE(2, 3);
+  void warn(std::string &fmt, ...);
+  void warn(const char *fmt, ...) PRINTFLIKE(2, 3);
+  void error(std::string &fmt, ...);
+  void error(const char *fmt, ...) PRINTFLIKE(2, 3);
+  void critical(std::string &fmt, ...);
+  void critical(const char *fmt, ...) PRINTFLIKE(2, 3);
 };
 
 }  // namespace Kaishi
 
-#endif  //KAISHIENGINE_INCLUDE_KAISHI_UTILS_LOG_H_
+#endif //KAISHIENGINE_INCLUDE_KAISHI_UTILS_LOG_H_

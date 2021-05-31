@@ -6,9 +6,11 @@
 #define EXAMPLES_OPENGLAPPLICATION_SRC_MAIN_H_
 
 #include <iostream>
+#include <thread>
 #include <unistd.h>
 
 #include <Kaishi/Kaishi.h>
+#include <Kaishi/Audio.h>
 #include "platform/api/openGL/openGL4.h"
 
 #include "Kaishi/Shader.h"

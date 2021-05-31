@@ -70,7 +70,11 @@ target_include_directories(${APPLICATION_NAME} PRIVATE
 set_target_properties(${APPLICATION_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG "${CMAKE_BINARY_DIR}/bin/examples/${APPLICATION_NAME}/Debug/")
 set_target_properties(${APPLICATION_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CMAKE_BINARY_DIR}/bin/examples/${APPLICATION_NAME}/Release/")
 
+if(APPLE)
+file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/assets" DESTINATION "${CMAKE_BINARY_DIR}/bin/examples/${APPLICATION_NAME}/${CMAKE_BUILD_TYPE}/${APPLICATION_NAME}.app/Contents/Resources/")
+else()
 file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/assets" DESTINATION "${CMAKE_BINARY_DIR}/bin/examples/${APPLICATION_NAME}/${CMAKE_BUILD_TYPE}/")
+endif()
 
 if(APPLE)
 ## Make sure we can find the 'ibtool' program. If we can NOT find it we
